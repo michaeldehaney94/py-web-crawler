@@ -6,8 +6,8 @@ from spider import Spider
 from domain import *
 from demo import *
 
-PROJECT_NAME = 'WebCrawler'
-HOMEPAGE = 'https://michaeldehaney94.github.io/photographywebsite/'
+PROJECT_NAME = 'enter your project name here...'
+HOMEPAGE = 'enter website url goes here...'
 DOMAIN_NAME = get_domain_name(HOMEPAGE)
 QUEUE_FILE = PROJECT_NAME + '/queue.txt'
 CRAWLED_FILE = PROJECT_NAME + '/crawled.txt'
