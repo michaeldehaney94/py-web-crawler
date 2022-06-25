@@ -1,0 +1,1 @@
+PLEASE NOTE! Before you are going to clone or download this web crawler to web scrape a specific website, you required to ask for permission from the website owners in order to collect data, unless you are the owner of such website. Web scraping a website without authorization will lead to legal implications. 

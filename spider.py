@@ -1,8 +1,9 @@
 # this file will send out spiders to websites, which are bots, to find the url links
 from urllib.request import urlopen
 from link_finder import LinkFinder
-from main import *
+from demo import *
 from savedata import *
+from domain import *
 
 
 class Spider:
@@ -41,9 +42,33 @@ class Spider:
             Spider.crawled.add(page_url)
             Spider.update_files()
 
+    # collect the URL links from website
+    @staticmethod
+    def gather_links(page_url):
+        html_string = ''
+        try:
+            response = urlopen(page_url)
+            if 'text/html' in response.getheader('Content-Type'):
+                html_bytes = response.read()
+                html_string = html_bytes.decode('utf-8')
 
+            finder = LinkFinder(Spider.base_url, page_url)
+            finder.feed(html_string)
+        except Exception as e:
+            print(str(e))
+            return set()
+        return finder.page_links()
 
+    @staticmethod
+    def add_links_to_queue(links):
+        for url in links:
+            if (url in Spider.queue) or (url in Spider.crawled):
+                continue
+            if Spider.domain_name != get_domain_name(url):
+                continue
+            Spider.queue.add(url)
 
-
-
-
+    @staticmethod
+    def update_files():
+        set_to_file(Spider.queue, Spider.queue_file)
+        set_to_file(Spider.crawled, Spider.crawled_file)
